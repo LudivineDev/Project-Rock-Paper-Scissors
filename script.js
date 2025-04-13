@@ -12,3 +12,16 @@ function getComputerChoice() {
     console.log(randomnumber)
 }
 getComputerChoice();
+
+function getHumanChoice() {
+    let choiceh = prompt("Please Choose between Rock, Paper or Scissors");
+    console.log(choiceh);
+}
+getHumanChoice();
+
+let humanScore = 0;
+console.log(humanScore);
+let computerScore = 0;
+console.log(computerScore);
+
+
