@@ -20,7 +20,6 @@ function getHumanChoice() {
 }
 
 let humanScore = 0;
-console.log(humanScore);
 let computerScore = 0;
 console.log(computerScore);
 let humanChoice = getHumanChoice();
@@ -37,13 +36,21 @@ if (humanChoice === computerChoice) {
     (humanChoice==="paper" && computerChoice==="rock")||
     (humanChoice==="rock" && computerChoice==="scissors")||
     (humanChoice==="scissors" && computerChoice==="paper")){
-
+    
+    humanScore++;
     Message = ("You Win " + humanChoice + " Beats "+ computerChoice + " !");
+    console.log("Human Score: "+ humanScore);
     } else {
+    computerScore++;
     Message = ("You Loose " + computerChoice + " Beats "+ humanChoice + " !");
+    console.log("Computer Score : "+ computerScore);
     }
     console.log(Message);
 
 }
 
 playRound(humanChoice, computerChoice);
+
+function playGame() {
+    
+}
