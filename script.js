@@ -1,68 +1,68 @@
 function getComputerChoice() {
-    let choice;
-    let randomnumber = Math.floor(Math.random()*3);
-    if (randomnumber === 0) {
-        choice="paper";
-    } else if (randomnumber === 1) {
-        choice="scissors"
-    } else {
-        choice="rock"
-    }
-    console.log(choice);
-    console.log(randomnumber)
-    return choice;
+    const choices = ["rock", "paper", "scissors"];
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    return choices[randomIndex]; // Return computer choice
 }
-
-function getHumanChoice() {
-    let choiceh = prompt("Please Choose between rock, paper or scissors");
-    console.log(choiceh);
-    return choiceh;
-}
-
 
 function playGame() {
-let humanScore = 0;
-let computerScore = 0;
+    let humanScore = 0;
+    let computerScore = 0;
 
-function playRound(humanChoice, computerChoice) {
-    humanChoice = humanChoice.toLowerCase();
-console.log("Normalized: "+ humanChoice);
-console.log(computerChoice)
-if (humanChoice === computerChoice) {
-    Message = "That's a tie";
-} else if (
-    (humanChoice==="paper" && computerChoice==="rock")||
-    (humanChoice==="rock" && computerChoice==="scissors")||
-    (humanChoice==="scissors" && computerChoice==="paper")){
-    
-    humanScore++;
-    Message = ("You Win " + humanChoice + " Beats "+ computerChoice + " !");
-    console.log("Human Score: "+ humanScore);
+    const finalMessage = document.createElement("div");
+    resultDiv.innerHTML = "";
+
+    if (humanScore > computerScore) {
+        finalMessage.textContent="You win the game!";
+    } else if (computerScore > humanScore) {
+        finalMessage.textContent="Computer wins the game!";
     } else {
-    computerScore++;
-    Message = ("You Loose " + computerChoice + " Beats "+ humanChoice + " !");
-    console.log("Computer Score : "+ computerScore);
+        finalMessage.textContent="It's a tie!";
     }
-    console.log(Message);
-    console.log(`Score: You - `+ humanScore +` Computer - ${computerScore}`);
+    const divScore = document.createElement("div");
+    divScore.textContent = `Score: You - ${humanScore} | Computer - ${computerScore}`;
+
+    const resultContainer = document.getElementById("result");
+    resultContainer.appendChild(divScore);
+    resultContainer.appendChild(finalMessage);
+
+    // Add event listeners to buttons
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const humanChoice = button.id; // Get human choice from clicked button
+            const computerChoice = getComputerChoice(); // Get computer's choice
+            playRound(humanChoice, computerChoice); // Call playRound with both choices
+        });
+    });
+
+    function playRound(humanChoice, computerChoice) {
+        humanChoice = humanChoice.toLowerCase(); // Normalize human choice
+        console.log("Human Chose: " + humanChoice);
+        console.log("Computer chose: " + computerChoice);
+
+        let message;
+        if (humanChoice === computerChoice) {
+            message = "That's a tie!";
+        } else if (
+            (humanChoice === "paper" && computerChoice === "rock") ||
+            (humanChoice === "rock" && computerChoice === "scissors") ||
+            (humanChoice === "scissors" && computerChoice === "paper")
+        ) {
+            humanScore++;
+            message = `You win! ${humanChoice} beats ${computerChoice}!`;
+        } else {
+            computerScore++;
+            message = `You lose! ${computerChoice} beats ${humanChoice}!`;
+        }
+
+        console.log(message);
+        console.log(`Score: You - ${humanScore} | Computer - ${computerScore}`);
+    }
+finalMessage();
 
 }
-for (let i = 1; i <= 5; i++) {
-    console.log(`----- Round ${i} -----`);
-    const humanChoice = getHumanChoice();// ask again each round 
-    const computerChoice = getComputerChoice();// generate new choice each round
-    playRound(humanChoice, computerChoice);
-}
-console.log("Final Score:");
-console.log(`You: ${humanScore} | Computer: ${computerScore}`); /* backticks mandatory do not work with ""*/
 
-if (humanScore>computerScore){
-    console.log("You Win the game!");
-} else if (computerScore>humanScore) {
-    console.log("Computer win the game!");
-} else{
-    console.log("It's a tie!");
 
-}
-}
-playGame()
+playGame();
+
+
