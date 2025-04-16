@@ -1,27 +1,18 @@
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
     const randomIndex = Math.floor(Math.random() * choices.length);
-    return choices[randomIndex]; // Return computer choice
+    return choices[randomIndex];
 }
 
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
-    const finalMessage = document.createElement("div");
-    resultDiv.innerHTML = "";
-
-    if (humanScore > computerScore) {
-        finalMessage.textContent="You win the game!";
-    } else if (computerScore > humanScore) {
-        finalMessage.textContent="Computer wins the game!";
-    } else {
-        finalMessage.textContent="It's a tie!";
-    }
-    const divScore = document.createElement("div");
-    divScore.textContent = `Score: You - ${humanScore} | Computer - ${computerScore}`;
-
     const resultContainer = document.getElementById("result");
+
+    const divScore = document.createElement("div");
+    const finalMessage = document.createElement("div");
+
     resultContainer.appendChild(divScore);
     resultContainer.appendChild(finalMessage);
 
@@ -29,14 +20,14 @@ function playGame() {
     const buttons = document.querySelectorAll("button");
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
-            const humanChoice = button.id; // Get human choice from clicked button
-            const computerChoice = getComputerChoice(); // Get computer's choice
-            playRound(humanChoice, computerChoice); // Call playRound with both choices
+            const humanChoice = button.id;
+            const computerChoice = getComputerChoice();
+            playRound(humanChoice, computerChoice);
         });
     });
 
     function playRound(humanChoice, computerChoice) {
-        humanChoice = humanChoice.toLowerCase(); // Normalize human choice
+        humanChoice = humanChoice.toLowerCase();
         console.log("Human Chose: " + humanChoice);
         console.log("Computer chose: " + computerChoice);
 
@@ -55,14 +46,19 @@ function playGame() {
             message = `You lose! ${computerChoice} beats ${humanChoice}!`;
         }
 
-        console.log(message);
-        console.log(`Score: You - ${humanScore} | Computer - ${computerScore}`);
-    }
-finalMessage();
+        divScore.textContent = `Score: You - ${humanScore} | Computer - ${computerScore}`;
+        finalMessage.textContent = message;
 
+        // Optional: declare winner when someone reaches 5
+        if (humanScore === 5 || computerScore === 5) {
+            const winner = humanScore === 5 ? "You win the game! 🎉" : "Computer wins the game! 💻";
+            alert(winner); // or show in the DOM
+            // Reset scores (optional)
+            humanScore = 0;
+            computerScore = 0;
+        }
+    }
 }
 
-
 playGame();
-
 
