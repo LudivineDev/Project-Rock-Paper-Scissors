@@ -51,8 +51,10 @@ function playGame() {
 
         // Optional: declare winner when someone reaches 5
         if (humanScore === 5 || computerScore === 5) {
-            const winner = humanScore === 5 ? "You win the game! 🎉" : "Computer wins the game! 💻";
-            alert(winner); // or show in the DOM
+            setTimeout(() => {
+                const winner = humanScore === 5 ? "You win the game! 🎉" : "Computer wins the game! 💻";
+                alert(winner);
+            }, 50); // or show in the DOM
             // Reset scores (optional)
             humanScore = 0;
             computerScore = 0;
