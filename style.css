@@ -46,3 +46,20 @@ button:hover {
     font-size: 22px;
     color: #007acc;
 }
+
+/* Mobile responsiveness */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 1rem;
+        padding: 12px 18px;
+    }
+
+    #result {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}
