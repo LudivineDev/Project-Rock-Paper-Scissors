@@ -54,10 +54,12 @@ function playGame() {
             setTimeout(() => {
                 const winner = humanScore === 5 ? "You win the game! 🎉" : "Computer wins the game! 💻";
                 alert(winner);
-            }, 50); // or show in the DOM
-            // Reset scores (optional)
-            humanScore = 0;
-            computerScore = 0;
+    
+                // Optional: reset the game
+                humanScore = 0;
+                computerScore = 0;
+                resultDiv.innerHTML = `<p>New game! Score: You - 0 | Computer - 0</p>`;
+            }, 100); // Small delay to allow UI to update first
         }
     }
 }
